@@ -5,7 +5,7 @@ class G_xy:
     def __init__(self):
         '''
         function \n
-        xy() ,xt() ,vt() ,vxt() ,vyt() \n
+        xy() ,xt() ,yt() ,vxt() ,vyt() ,listxt() ,listyt() ,listvxt() ,listvyt() \n
         กราฟ 1 \n
         V_initial = 5.7 ,g = 9.8\n
         กราฟ 2 \n
@@ -154,12 +154,74 @@ class G_xy:
             plt.pause(0.1)
         plt.show()
     
+    def listxt(self):
+        '''
+        V_initial = 5.7 \n
+        g = 9.8
+        '''
+        for t in self.time3:
+            r_x = self.v_x * t
+            r_y = (self.v_y * t) - 1/2 * self.g * (t ** 2) + 0.6
+            if r_y >= 0:
+                self.lr_x.append(t)
+                self.lr_y.append(r_x)
+            else:
+                break
+        return self.lr_x, self.lr_y
+    
+    def listyt(self):
+        '''
+        V_initial1 = 5.7 \n
+        g = 9.8
+        '''
+        for t in self.time3:
+            r_y = (self.v_y1 * t) - 1/2 * self.g * (t ** 2) + 0.6
+            if r_y >= 0:
+                self.lr_x1.append(t)
+                self.lr_y1.append(r_y)
+            else:
+                break
+        return self.lr_x1, self.lr_y1
+    
+    def listvxt(self):
+        '''
+        V_initial2 = 5.7 \n
+        g = 9.8
+        '''
+        for t in self.time3:
+            r_y = (self.v_y2 * t) - 1 / 2 * self.g * (t ** 2) + 0.6
+            if r_y >= 0:
+                self.lr_x2.append(t)
+                self.lr_y2.append(self.v_x2)
+            else:
+                break
+        return self.lr_x2, self.lr_y2
+
+    def listvyt(self):
+        '''
+        V_initial3 = 5.7 \n
+        g = 9.8
+        '''
+        for t in self.time3:
+            r_y = (self.v_y3 * t) - 1 / 2 * self.g * (t ** 2) + 0.6
+            abv = self.v_y3 - self.g * t
+            if r_y >= 0:
+                self.lr_x3.append(t)
+                self.lr_y3.append(abv)
+            else:
+                break
+        return self.lr_x3, self.lr_y3
+    
     def __str__(self):
         return 'x = G_xy()\nx.g = 9\nx.t = 0.01\nx.V_initial3 = 6\nx.xy()'
     
 if __name__ == '__main__':
-    print(G_xy())
-    # x = G_xy()
+    # print(G_xy())
+    x = G_xy()
+    # x.xy()
+    x1 , y1 = x.listvyt()
+    plt.plot(x1,y1)
+    plt.show()
     # x.g = 8
     # x.vyt()
     # x.g1 = 9
